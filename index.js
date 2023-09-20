@@ -5,7 +5,9 @@ import NodeCache from "node-cache";
 const app = express();
 const cache = new NodeCache();
 
-app.get("/", async (request, response) => {
+app.use(express.static('public'));
+
+app.get("/screenshot", async (request, response) => {
     if(!request.query.url || !isValidUrl(request.query.url)) {
         response.redirect('https://pieterhielkema.nl');
         return;

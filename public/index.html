@@ -1,0 +1,23 @@
+<!doctype html>
+<html class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Screenshutter</title>
+</head>
+<body class="bg-white h-full flex px-4">
+    <div class="m-auto flex flex-col md:flex-row items-center gap-24">
+        <div class="w-auto md:w-96">
+            <a href="https://pieterhielkema.nl" class="text-xs bg-green-500 rounded-md text-white inline-block px-2 py-1 mb-4">pieterhielkema.nl</a>
+            <h1 class="text-4xl font-extrabold mb-6">Create screenshots from any url you like</h1>
+            <p class="text-lg mb-6">Screenshutter is a user-friendly online tool to take screenshots of a website. Insert the url you want to screenshot and go!</p>
+            <form action="/screenshot">
+                <input type="url" name="url" class="w-full rounded-lg bg-gray-100 px-6 py-4" placeholder="https://google.com">
+            </form>
+        </div>
+        <img src="devices.svg" alt="Devices" class="h-48 max-w-full">
+    </div>
+</body>
+</html>
