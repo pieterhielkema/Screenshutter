@@ -24,7 +24,7 @@ app.get("/", async (request, response) => {
             headless: "new"
         });
         const page = await browser.newPage();
-        await page.goto(request.query.url, {"waitUntil" : "networkidle2"});
+        await page.goto(request.query.url, {"waitUntil" : "networkidle0"});
         await page.setViewport({
             width: request.query?.width ? parseInt(request.query.width) : 1500,
             height: request.query?.height ? parseInt(request.query.height) : 700,
