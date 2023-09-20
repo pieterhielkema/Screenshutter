@@ -1,13 +1,23 @@
 import express from 'express';
 import puppeteer from "puppeteer";
+import NodeCache from "node-cache";
 
 const app = express();
+const cache = new NodeCache();
 
 app.get("/", async (request, response) => {
     if(!request.query.url) {
         response.redirect('https://pieterhielkema.nl');
         return;
     }
+
+    const image = cache.get( "page_" + request.query.url);
+    if(image) {
+        response.set('Content-Type', 'image/png');
+        response.send(image);
+        return;
+    }
+
     try {
         const browser = await puppeteer.launch({
             args: ['--no-sandbox'],
@@ -22,6 +32,9 @@ app.get("/", async (request, response) => {
         })
         const image = await page.screenshot({fullPage : true});
         await browser.close();
+
+        cache.set( "page_" + request.query.url, image, 10000 );
+
         response.set('Content-Type', 'image/png');
         response.send(image);
     } catch (error) {
@@ -32,3 +45,4 @@ app.get("/", async (request, response) => {
 const listener = app.listen(process.env.PORT || 80, function () {
     console.log('Your app is listening on port ' + listener.address().port);
 });
+listener.setTimeout(10000);
