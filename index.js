@@ -5,7 +5,7 @@ const app = express();
 
 app.get("/", async (request, response) => {
     if(!request.query.url) {
-        response.redirect('https://google.nl');
+        response.redirect('https://pieterhielkema.nl');
         return;
     }
     try {
