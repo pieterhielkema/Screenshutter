@@ -6,6 +6,7 @@ const app = express();
 app.get("/", async (request, response) => {
     if(!request.query.url) {
         response.redirect('https://google.nl');
+        return;
     }
     try {
         const browser = await puppeteer.launch({
