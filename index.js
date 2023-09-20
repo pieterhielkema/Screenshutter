@@ -6,7 +6,7 @@ const app = express();
 const cache = new NodeCache();
 
 app.get("/", async (request, response) => {
-    if(!request.query.url) {
+    if(!request.query.url || !isValidUrl(request.query.url)) {
         response.redirect('https://pieterhielkema.nl');
         return;
     }
@@ -46,3 +46,12 @@ const listener = app.listen(process.env.PORT || 80, function () {
     console.log('Your app is listening on port ' + listener.address().port);
 });
 listener.setTimeout(10000);
+
+const isValidUrl = (urlString) => {
+    try {
+        return Boolean(new URL(urlString));
+    }
+    catch(e){
+        return false;
+    }
+}
